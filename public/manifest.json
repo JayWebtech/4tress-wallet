@@ -1,0 +1,14 @@
+{
+  "manifest_version": 3,
+  "name": "4tress-wallet",
+  "version": "1.0",
+  "description": "",
+  "action": {
+    "default_popup": "index.html"
+  },
+  "permissions": ["scripting", "tabs", "activeTab"],
+  "host_permissions": ["https://*/*", "http://*/*"],
+  "icons": {
+    "16": "img/wallet.png"
+  }
+}

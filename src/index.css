@@ -1,0 +1,15 @@
+@import "tailwindcss";
+@config "../tailwind.config.js";
+
+@font-face {
+  font-family: "Sync";
+  src: url("/fonts/Syne-VariableFont_wght.ttf") format("truetype");
+}
+@font-face {
+  font-family: "Urbanist";
+  src: url("/fonts/Urbanist-VariableFont_wght.ttf") format("truetype");
+}
+
+* {
+  font-family: "Sync", sans-serif;
+}
