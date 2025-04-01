@@ -1,10 +1,20 @@
+import toast from "react-hot-toast";
 import Button from "../form/Button";
+import {  ec, stark } from 'starknet';
+import { useNavigate } from "react-router";
 
 function BottomSheet({ isOpen, onClose }) {
-  const openFullscreen = (path) => {
-    const url = chrome.runtime.getURL(`index.html#/${path}`);
-    window.open(url, "_blank");
-  };
+  // const openFullscreen = (path) => {
+  //   const url = chrome.runtime.getURL(`index.html#/${path}`);
+  //   window.open(url, "_blank");
+  // };
+
+  const navigate = useNavigate();
+
+  const CreateWallet = () => {
+    const privateKey = stark.randomAddress();
+    navigate("/password", { state: { privateKey } });
+  }
 
   return (
     <>
@@ -17,14 +27,14 @@ function BottomSheet({ isOpen, onClose }) {
             </h2>
             <Button
               className="w-full"
-              onClick={() => openFullscreen("create-wallet")}
+              onClick={() => CreateWallet()}
               variant="secondary"
             >
               Create New Wallet
             </Button>
             <Button
               className="w-full"
-              onClick={() => openFullscreen("/import-wallet")}
+              onClick={() => {toast.success("Coming soon!")}}
             >
               Import Wallet
             </Button>

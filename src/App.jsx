@@ -1,10 +1,21 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { useLocation, useNavigate } from "react-router";
+
 import Button from "./components/form/Button";
 import BottomSheet from "./components/modal/BottomSheet";
-import Logo from "./components/reusable/Logo";
+import Logo from "./components/layout/Logo";
 
 function App() {
   const [isBottomSheetOpen, setIsBottomSheetOpen] = useState(false);
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    const hasCredentials = localStorage.getItem("4tress_credentials");
+    if (hasCredentials) {
+      console.log("🔐 User has credentials, redirecting to /wallet");
+      navigate("/wallet");
+    }
+  }, [navigate]);
 
   return (
     <>
@@ -18,6 +29,7 @@ function App() {
             <h1 className="text-white text-3xl font-bold">
               Crypto at the speed of light
             </h1>
+            <p className="text-white text-sm">Starknet.js demo wallet</p>
             <Button
               className="w-full"
               onClick={() => setIsBottomSheetOpen(true)}
@@ -27,6 +39,7 @@ function App() {
           </div>
         </div>
       </div>
+
       <BottomSheet
         isOpen={isBottomSheetOpen}
         onClose={() => setIsBottomSheetOpen(false)}

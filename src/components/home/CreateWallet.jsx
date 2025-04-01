@@ -1,37 +1,24 @@
-import React, { useState } from "react";
-import { FaCopy } from "react-icons/fa"; // Import the copy icon
+import React, { useState, useEffect } from "react";
+import { FaCopy } from "react-icons/fa";
 import Button from "../form/Button";
-import Logo from "../reusable/Logo";
+import Logo from "../layout/Logo";
 import { useNavigate } from "react-router";
+import { Wallet } from "ethers";
 
 const CreateWallet = () => {
-  const [mnemonic, setMnemonic] = useState([]);
+  const [mnemonic, setMnemonic] = useState();
   const [isRevealed, setIsRevealed] = useState(false);
   const [isCopied, setIsCopied] = useState(false);
 
   const navigate = useNavigate();
 
-  // Generate a random mnemonic phrase (mocked for simplicity)
   const generateMnemonic = () => {
-    const words = [
-      "then",
-      "vacant",
-      "get",
-      "exist",
-      "seed",
-      "usage",
-      "ride",
-      "open",
-      "comic",
-      "cross",
-      "upon",
-      "hub",
-    ];
-    return words.sort(() => Math.random() - 0.5).slice(0, 12);
+    const _mnemonic = Wallet.createRandom().mnemonic.phrase;
+    const mnemonicWords = _mnemonic.trim().split(' ');
+    return mnemonicWords;
   };
 
-  // Generate mnemonic on component mount
-  React.useEffect(() => {
+  useEffect(() => {
     setMnemonic(generateMnemonic());
   }, []);
 
@@ -44,9 +31,9 @@ const CreateWallet = () => {
   };
 
   const handleCopy = () => {
-    navigator.clipboard.writeText(mnemonic.join(" ")); // Copy mnemonic to clipboard
+    navigator.clipboard.writeText(mnemonic.join(" "));
     setIsCopied(true);
-    setTimeout(() => setIsCopied(false), 2000); // Reset copy status after 2 seconds
+    setTimeout(() => setIsCopied(false), 2000);
   };
 
   return (
